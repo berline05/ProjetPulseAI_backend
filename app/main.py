@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import ai, channels, webhooks
+from app.routers import ai, channels, webhooks, payment
 from app.database import init_db
 
 app = FastAPI(
@@ -24,6 +24,8 @@ async def startup():
 app.include_router(ai.router, prefix="/api/ai", tags=["IA"])
 app.include_router(channels.router, prefix="/api/channels", tags=["Canaux"])
 app.include_router(webhooks.router, prefix="/api/webhooks", tags=["Webhooks"])
+app.include_router(payment.router, prefix="/api/payment", tags=["Paiement"])
+
 
 @app.get("/")
 def root():
